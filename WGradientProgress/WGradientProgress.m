@@ -71,7 +71,7 @@
     CGRect frame = CGRectZero;
     //progress is on the down border of parentView
     if (self.position == WProgressPosDown) {
-        frame = CGRectMake(0, parentView.bottom - 10, parentView.width, 100);
+        frame = CGRectMake(0, parentView.middleY - 10, parentView.width, 1);
     } else if (self.position == WProgressPosUp) {
         frame = CGRectMake(0, -1, parentView.width, 1);
     }
@@ -91,10 +91,16 @@
     
     //create colors, important section
     NSMutableArray *colors = [NSMutableArray array];
-    for (NSInteger bluePixel = 0; bluePixel < 255; bluePixel++) {
-        UIColor *color = [UIColor colorWithRed:0 green:0 blue:bluePixel alpha:1];
-        [colors addObject:color];
+    for (NSInteger deg = 0; deg <= 360; deg += 5) {
+        
+        UIColor *color;
+        color = [UIColor colorWithHue:1.0 * deg / 360.0
+                           saturation:1.0
+                           brightness:1.0
+                                alpha:1.0];
+        [colors addObject:(id)[color CGColor]];
     }
+    [self.gradLayer setColors:[NSArray arrayWithArray:colors]];
     [self.gradLayer setColors:colors];
     self.mask = [CALayer layer];
     [self.mask setFrame:CGRectMake(0, 0, self.progress * self.width, self.height)];
@@ -116,6 +122,7 @@
     if ([self.timer isValid] == NO) {
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
     }
+    [self.timer fire];
 }
 
 
