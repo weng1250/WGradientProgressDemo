@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "WGradientProgress.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    WGradientProgress *gradProg = [WGradientProgress sharedInstance];
+    [gradProg showOnParent:self.view position:WProgressPosDown];
+    [gradProg setProgress:0.6];
 }
 
 - (void)didReceiveMemoryWarning {

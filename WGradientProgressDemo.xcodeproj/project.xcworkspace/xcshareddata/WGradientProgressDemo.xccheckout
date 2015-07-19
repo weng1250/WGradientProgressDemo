@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>74095DEB-CE63-43F9-8BAC-56A0FB94B0C4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WGradientProgressDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>77B24532572326DA0DE6D42CC36E313C57F30E59</key>
+		<string>https://github.com/weng1250/WGradientProgressDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WGradientProgressDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>77B24532572326DA0DE6D42CC36E313C57F30E59</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/weng1250/WGradientProgressDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>77B24532572326DA0DE6D42CC36E313C57F30E59</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>77B24532572326DA0DE6D42CC36E313C57F30E59</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WGradientProgressDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
