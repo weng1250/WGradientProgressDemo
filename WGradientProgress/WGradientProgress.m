@@ -30,6 +30,8 @@
             s_instance = [[WGradientProgress alloc] init];
             s_instance.progress = 0;
             s_instance.position = WProgressPosDown;
+            [s_instance setupTimer];
+            s_instance.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         }
     });
     return s_instance;
@@ -40,14 +42,16 @@
     self.position = pos;
     CGRect frame = [self decideTargetFrame:parentView];
     self.frame = frame;
+//    self.layer.borderColor = [[UIColor redColor] CGColor];
+//    self.layer.borderWidth = 2;
     [parentView addSubview:self];
     [self initBottomLayer];
-    //setup timer
-    [self setupTimer];
+    [self startTimer];
 }
 
 - (void)hide
 {
+    //[self.timer setFireDate:[NSDate distantPast]];
     [self.timer invalidate];
     if ([self superview]) {
         [self removeFromSuperview];
@@ -57,9 +61,13 @@
 #pragma mark -- setter / getter
 - (void)setProgress:(CGFloat)progress
 {
-    if (progress < 0 || progress > 1) {
-        return;
+    if (progress < 0) {
+        progress = 0;
     }
+    if (progress > 1) {
+        progress = 1;
+    }
+    _progress = progress;
     CGFloat maskWidth = progress * self.width;
     self.mask.frame = CGRectMake(0, 0, maskWidth, self.height);
 }
@@ -71,7 +79,7 @@
     CGRect frame = CGRectZero;
     //progress is on the down border of parentView
     if (self.position == WProgressPosDown) {
-        frame = CGRectMake(0, parentView.middleY - 10, parentView.width, 1);
+        frame = CGRectMake(0, parentView.height, parentView.width, 2);
     } else if (self.position == WProgressPosUp) {
         frame = CGRectMake(0, -1, parentView.width, 1);
     }
@@ -83,8 +91,7 @@
     //get gradient layer
     if (self.gradLayer == nil) {
         self.gradLayer = [CAGradientLayer layer];
-        self.gradLayer.frame = self.frame;
-        self.gradLayer.backgroundColor = [[UIColor redColor] CGColor];
+        self.gradLayer.frame = self.bounds;
     }
     self.gradLayer.startPoint = CGPointMake(0, 0.5);
     self.gradLayer.endPoint = CGPointMake(1, 0.5);
@@ -103,8 +110,11 @@
     [self.gradLayer setColors:[NSArray arrayWithArray:colors]];
     [self.gradLayer setColors:colors];
     self.mask = [CALayer layer];
-    [self.mask setFrame:CGRectMake(0, 0, self.progress * self.width, self.height)];
-    //[self.gradLayer setMask:self.mask];
+    [self.mask setFrame:CGRectMake(self.gradLayer.frame.origin.x, self.gradLayer.frame.origin.y,
+                                   self.progress * self.width, self.height)];
+    self.mask.borderColor = [[UIColor blueColor] CGColor];
+    self.mask.borderWidth = 2;
+    [self.gradLayer setMask:self.mask];
     [self.layer addSublayer:self.gradLayer];
 }
 
@@ -113,24 +123,30 @@
  */
 - (void)setupTimer
 {
-    CGFloat interval = 0.5;
+    CGFloat interval = 0.03;
     if (self.timer == nil) {
          self.timer = [NSTimer timerWithTimeInterval:interval target:self
                                             selector:@selector(timerFunc)
                                             userInfo:nil repeats:YES];
     }
-    if ([self.timer isValid] == NO) {
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-    }
-    [self.timer fire];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
+
+- (void)startTimer
+{
+    //start timer
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
+    [self.timer setFireDate:[NSDate date]];
+}
 
 /**
  *  rearrange color array
  */
 - (void)timerFunc
 {
+    NSLog(@"time function");
     CAGradientLayer *gradLayer = self.gradLayer;
     NSMutableArray *copyArray = [NSMutableArray arrayWithArray:[gradLayer colors]];
     UIColor *lastColor = [copyArray lastObject];
@@ -138,22 +154,7 @@
     if (lastColor) {
         [copyArray insertObject:lastColor atIndex:0];
     }
-    
-    //move color with animation
-    // Create an animation to slowly move the hue gradient left to right.
-    
-    CABasicAnimation *animation;
-    animation = [CABasicAnimation animationWithKeyPath:@"colors"];
-    [animation setFromValue:[gradLayer colors]];
-    [animation setToValue:copyArray];
-    [animation setDuration:0.08];
-    [animation setRemovedOnCompletion:YES];
-    [animation setFillMode:kCAFillModeForwards];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    [animation setDelegate:self];
-    
-    // Add the animation to our layer
-    [gradLayer addAnimation:animation forKey:@"animateGradient"];
+    [self.gradLayer setColors:copyArray];
 }
 
 
