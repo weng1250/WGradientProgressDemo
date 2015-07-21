@@ -43,6 +43,12 @@
     return s_instance;
 }
 
+/**
+ *  the main interface to show WGradientProgress obj
+ *
+ *  @param parentView which view to be attach
+ *  @param pos        up or down
+ */
 - (void)showOnParent:(UIView *)parentView position:(WProgressPos)pos
 {
     self.position = pos;
@@ -54,6 +60,9 @@
     [self startTimer];
 }
 
+/**
+ *  the main interface to hide WGradientProgress obj
+ */
 - (void)hide
 {
     [self pauseTimer];
