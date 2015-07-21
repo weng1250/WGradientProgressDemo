@@ -8,6 +8,7 @@
 
 #import "WGradientProgress.h"
 #import "UIView+Frame.h"
+#import "GlobalCommon.h"
 
 @interface WGradientProgress ()
 
@@ -17,9 +18,14 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, strong) UIView *parentView;
+
 @end
 
 @implementation WGradientProgress
+
+
+#pragma mark -- public methods
 
 + (WGradientProgress *)sharedInstance
 {
@@ -31,7 +37,7 @@
             s_instance.progress = 0;
             s_instance.position = WProgressPosDown;
             [s_instance setupTimer];
-            s_instance.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+            s_instance.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
     });
     return s_instance;
@@ -40,10 +46,9 @@
 - (void)showOnParent:(UIView *)parentView position:(WProgressPos)pos
 {
     self.position = pos;
+    self.parentView = parentView;
     CGRect frame = [self decideTargetFrame:parentView];
     self.frame = frame;
-//    self.layer.borderColor = [[UIColor redColor] CGColor];
-//    self.layer.borderWidth = 2;
     [parentView addSubview:self];
     [self initBottomLayer];
     [self startTimer];
@@ -51,8 +56,7 @@
 
 - (void)hide
 {
-    //[self.timer setFireDate:[NSDate distantPast]];
-    [self.timer invalidate];
+    [self pauseTimer];
     if ([self superview]) {
         [self removeFromSuperview];
     }
@@ -74,6 +78,7 @@
 
 
 #pragma mark -- private methods
+
 - (CGRect)decideTargetFrame:(UIView *)parentView
 {
     CGRect frame = CGRectZero;
@@ -137,8 +142,16 @@
 {
     //start timer
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-    [self.timer fire];
     [self.timer setFireDate:[NSDate date]];
+}
+
+/**
+ *  here we just pause timer, rather than stopping forever.
+ *  NOTE: [timer invalidate] is not fit here.
+ */
+- (void)pauseTimer
+{
+    [self.timer setFireDate:[NSDate distantFuture]];
 }
 
 /**
@@ -146,7 +159,6 @@
  */
 - (void)timerFunc
 {
-    NSLog(@"time function");
     CAGradientLayer *gradLayer = self.gradLayer;
     NSMutableArray *copyArray = [NSMutableArray arrayWithArray:[gradLayer colors]];
     UIColor *lastColor = [copyArray lastObject];
@@ -156,6 +168,5 @@
     }
     [self.gradLayer setColors:copyArray];
 }
-
 
 @end

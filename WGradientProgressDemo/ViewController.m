@@ -44,16 +44,20 @@
 - (void)simulateProgress
 {
     WGradientProgress *gradProg = [WGradientProgress sharedInstance];
+    if (gradProg.progress == 0) {
+        CGFloat increment = (arc4random() % 5) / 10.0f + 0.1;
+        CGFloat progress  = [gradProg progress] + increment;
+        [gradProg setProgress:progress];
+    }
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         CGFloat increment = (arc4random() % 5) / 10.0f + 0.1;
         CGFloat progress  = [gradProg progress] + increment;
-        NSLog(@"progress:%@", @([gradProg progress]));
+        NSLog(@"progress:%@", @(progress));
         [gradProg setProgress:progress];
         if (progress < 1.0) {
-            
             [self simulateProgress];
         }
     });
@@ -69,7 +73,8 @@
 {
     WGradientProgress *gradProg = [WGradientProgress sharedInstance];
     if (swi.isOn) {
-        [gradProg showOnParent:self.view position:WProgressPosDown];
+        [gradProg showOnParent:self.navigationController.navigationBar position:WProgressPosDown];
+        [gradProg setProgress:0];
         [self simulateProgress];
     } else {
         [gradProg hide];

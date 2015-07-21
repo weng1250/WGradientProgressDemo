@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		192B701D1B5E203F00BA084D /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 192B701C1B5E203F00BA084D /* UIView+Frame.m */; };
 		19B863411B5B88C10038AF26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B863401B5B88C10038AF26 /* main.m */; };
 		19B863441B5B88C10038AF26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B863431B5B88C10038AF26 /* AppDelegate.m */; };
 		19B863471B5B88C10038AF26 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B863461B5B88C10038AF26 /* ViewController.m */; };
@@ -15,7 +16,6 @@
 		19B8634F1B5B88C10038AF26 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B8634D1B5B88C10038AF26 /* LaunchScreen.xib */; };
 		19B8635B1B5B88C20038AF26 /* WGradientProgressDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B8635A1B5B88C20038AF26 /* WGradientProgressDemoTests.m */; };
 		19B863671B5B892B0038AF26 /* WGradientProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B863661B5B892B0038AF26 /* WGradientProgress.m */; };
-		19B8636A1B5B92FA0038AF26 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B863691B5B92FA0038AF26 /* UIView+Frame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		192B701B1B5E203F00BA084D /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		192B701C1B5E203F00BA084D /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		192B701F1B5E20ED00BA084D /* GlobalCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalCommon.h; sourceTree = "<group>"; };
 		19B8633B1B5B88C10038AF26 /* WGradientProgressDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WGradientProgressDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B8633F1B5B88C10038AF26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19B863401B5B88C10038AF26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,8 +47,6 @@
 		19B8635A1B5B88C20038AF26 /* WGradientProgressDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WGradientProgressDemoTests.m; sourceTree = "<group>"; };
 		19B863651B5B892B0038AF26 /* WGradientProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGradientProgress.h; sourceTree = "<group>"; };
 		19B863661B5B892B0038AF26 /* WGradientProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGradientProgress.m; sourceTree = "<group>"; };
-		19B863681B5B92FA0038AF26 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		19B863691B5B92FA0038AF26 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		192B701A1B5E203F00BA084D /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				192B701B1B5E203F00BA084D /* UIView+Frame.h */,
+				192B701C1B5E203F00BA084D /* UIView+Frame.m */,
+				192B701F1B5E20ED00BA084D /* GlobalCommon.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		19B863321B5B88C10038AF26 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +140,7 @@
 		19B863641B5B88E90038AF26 /* WGradientProgress */ = {
 			isa = PBXGroup;
 			children = (
-				19B863681B5B92FA0038AF26 /* UIView+Frame.h */,
-				19B863691B5B92FA0038AF26 /* UIView+Frame.m */,
+				192B701A1B5E203F00BA084D /* Lib */,
 				19B863651B5B892B0038AF26 /* WGradientProgress.h */,
 				19B863661B5B892B0038AF26 /* WGradientProgress.m */,
 			);
@@ -240,7 +250,7 @@
 				19B863671B5B892B0038AF26 /* WGradientProgress.m in Sources */,
 				19B863471B5B88C10038AF26 /* ViewController.m in Sources */,
 				19B863441B5B88C10038AF26 /* AppDelegate.m in Sources */,
-				19B8636A1B5B92FA0038AF26 /* UIView+Frame.m in Sources */,
+				192B701D1B5E203F00BA084D /* UIView+Frame.m in Sources */,
 				19B863411B5B88C10038AF26 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
