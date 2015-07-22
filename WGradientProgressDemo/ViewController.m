@@ -35,11 +35,6 @@
 
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-
-}
 
 - (void)simulateProgress
 {

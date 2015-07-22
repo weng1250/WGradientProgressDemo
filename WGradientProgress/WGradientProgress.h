@@ -10,8 +10,8 @@
 
 typedef NS_ENUM(NSUInteger, WProgressPos)
 {
-    WProgressPosUp = 0,     //progress is on the up border of parent view
-    WProgressPosDown        //progress is on the down border of parent view
+    WProgressPosDown = 0,        //default, progress is on the down border of parent view
+    WProgressPosUp               //progress is on the up border of parent view
 };
 
 @interface WGradientProgress : UIView
@@ -20,6 +20,13 @@ typedef NS_ENUM(NSUInteger, WProgressPos)
 @property (nonatomic, assign) WProgressPos position;
 
 + (WGradientProgress *)sharedInstance;
+
+/**
+ *  the main interface to show WGradientProgress obj, position is WProgressPosDown by default.
+ *
+ *  @param parentView which view to be attach
+ */
+- (void)showOnParent:(UIView *)parentView;
 
 /**
  *  the main interface to show WGradientProgress obj

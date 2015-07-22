@@ -44,6 +44,16 @@
 }
 
 /**
+ *  the main interface to show WGradientProgress obj, position is WProgressPosDown by default.
+ *
+ *  @param parentView which view to be attach
+ */
+- (void)showOnParent:(UIView *)parentView
+{
+    [self showOnParent:parentView position:WProgressPosDown];
+}
+
+/**
  *  the main interface to show WGradientProgress obj
  *
  *  @param parentView which view to be attach
@@ -102,7 +112,6 @@
 
 - (void)initBottomLayer
 {
-    //get gradient layer
     if (self.gradLayer == nil) {
         self.gradLayer = [CAGradientLayer layer];
         self.gradLayer.frame = self.bounds;
@@ -122,7 +131,6 @@
         [colors addObject:(id)[color CGColor]];
     }
     [self.gradLayer setColors:[NSArray arrayWithArray:colors]];
-    [self.gradLayer setColors:colors];
     self.mask = [CALayer layer];
     [self.mask setFrame:CGRectMake(self.gradLayer.frame.origin.x, self.gradLayer.frame.origin.y,
                                    self.progress * self.width, self.height)];
