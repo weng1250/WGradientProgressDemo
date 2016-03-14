@@ -16,7 +16,7 @@
 
 <p>Here are examples for WGradientProgress:</p>
 
-<p><img src="http://chuantu.biz/t2/10/1437463581x-1376436589.gif" alt="" title=""></p>
+<p><img src="http://media.xtwind.com/images/2016/03/14/8429fdc87fb84c60eea8508d6a1c7440.gif" alt="" title=""></p>
 <hr>
 
 <h2 id="installtation">INSTALLTATION</h2>
