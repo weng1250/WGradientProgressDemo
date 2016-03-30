@@ -79,6 +79,7 @@
     if ([self superview]) {
         [self removeFromSuperview];
     }
+    self.parentView = nil;
 }
 
 #pragma mark -- setter / getter
